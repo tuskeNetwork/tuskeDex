@@ -90,7 +90,9 @@ public class XmrNodes {
                     new XmrNode(MoneroNodesOption.PROVIDED, null, null, "au.tuske.network", 20241, 2, "@tuskeTeam"),
                     new XmrNode(MoneroNodesOption.PROVIDED, null, null, "in.tuske.network", 20241, 2, "@tuskeTeam"),
                     new XmrNode(MoneroNodesOption.PROVIDED, null, null, "node-us.tuske.network", 2024, 2, "@tuskeTeam"),
-                    new XmrNode(MoneroNodesOption.PROVIDED, null, null, "node-jp.tuske.network", 2024, 2, "@tuskeTeam")
+                    new XmrNode(MoneroNodesOption.PROVIDED, null, null, "node-jp.tuske.network", 2024, 2, "@tuskeTeam"),
+                    new XmrNode(MoneroNodesOption.PROVIDED, null, "tuske5hkcseb6srksudc2eiuhkcetf7ibbkz3hsbfbar2kyi2lykkrid.onion",null, 20243, 2, "@tuskeTeam"),
+                    new XmrNode(MoneroNodesOption.PROVIDED, null, "tusketluwz3igsax57dpwetybs5oacvrfcre6xdwl6cheax3i5wh5uyd.onion",null, 20243, 2, "@tuskeTeam")
                 );
             default:
                 throw new IllegalStateException("Unexpected base currency network: " + Config.baseCurrencyNetwork());

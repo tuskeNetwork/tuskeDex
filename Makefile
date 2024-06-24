@@ -432,7 +432,7 @@ seednode:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=1002 \
-		--appName=tuskeDex-TSK_MAINNET_Seed_1002 \
+		--appName=tuskeDex_Seed_1002 \
 		--xmrNode=http://127.0.0.1:20241 \
 
 seednode2:
@@ -441,7 +441,7 @@ seednode2:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=1003 \
-		--appName=tuskeDex-TSK_MAINNET_Seed_1003 \
+		--appName=tuskeDex_Seed_1003 \
 		--xmrNode=http://127.0.0.1:20241 \
 
 arbitrator-daemon-mainnet:
@@ -451,7 +451,7 @@ arbitrator-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_arbitrator \
+		--appName=tuskeDex_arbitrator \
 		--apiPassword=apitest \
 		--apiPort=1200 \
 		--passwordRequired=false \
@@ -464,7 +464,7 @@ arbitrator-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_arbitrator \
+		--appName=tuskeDex_arbitrator \
 		--apiPassword=apitest \
 		--apiPort=1200 \
 		--xmrNode=http://127.0.0.1:20241 \
@@ -500,7 +500,7 @@ user1-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_user1 \
+		--appName=tuskeDex_user1 \
 		--apiPassword=apitest \
 		--apiPort=1202 \
 		--passwordRequired=false \
@@ -513,7 +513,7 @@ user1-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_user1 \
+		--appName=tuskeDex_user1 \
 		--apiPassword=apitest \
 		--apiPort=1202 \
 		--useNativeXmrWallet=false \
@@ -525,7 +525,7 @@ user2-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_user2 \
+		--appName=tuskeDex_user2 \
 		--apiPassword=apitest \
 		--apiPort=1203 \
 		--passwordRequired=false \
@@ -538,7 +538,7 @@ user2-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_user2 \
+		--appName=tuskeDex_user2 \
 		--apiPassword=apitest \
 		--apiPort=1203 \
 		--useNativeXmrWallet=false \
@@ -550,7 +550,7 @@ user3-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=tuskeDex-TSK_MAINNET_user3 \
+		--appName=tuskeDex_user3 \
 		--apiPassword=apitest \
 		--apiPort=1204 \
 		--useNativeXmrWallet=false \
