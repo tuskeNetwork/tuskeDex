@@ -285,7 +285,7 @@ public class MainViewModel implements ViewModel, HavenoSetup.HavenoSetupListener
                             .show();
                 }, 1);
             }
-        } else if (Config.baseCurrencyNetwork() == BaseCurrencyNetwork.XMR_MAINNET) {
+        } else if (Config.baseCurrencyNetwork() == BaseCurrencyNetwork.TSK_MAINNET) {
             String key = "welcome.mainnet";
             boolean isReleaseLimited = HavenoUtils.isReleasedWithinDays(HavenoUtils.RELEASE_LIMIT_DAYS);
             if (DontShowAgainLookup.showAgain(key)) {

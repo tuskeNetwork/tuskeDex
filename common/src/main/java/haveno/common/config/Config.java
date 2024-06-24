@@ -126,7 +126,7 @@ public class Config {
     // Static fields that provide access to Config properties in locations where injecting
     // a Config instance is not feasible. See Javadoc for corresponding static accessors.
     private static File APP_DATA_DIR_VALUE;
-    private static BaseCurrencyNetwork BASE_CURRENCY_NETWORK_VALUE = BaseCurrencyNetwork.XMR_MAINNET;
+    private static BaseCurrencyNetwork BASE_CURRENCY_NETWORK_VALUE = BaseCurrencyNetwork.TSK_MAINNET;
 
     // Default "data dir properties", i.e. properties that can determine the location of
     // Haveno's application data directory (appDataDir)
@@ -332,7 +332,7 @@ public class Config {
                         .withRequiredArg()
                         .ofType(BaseCurrencyNetwork.class)
                         .withValuesConvertedBy(new EnumValueConverter(BaseCurrencyNetwork.class))
-                        .defaultsTo(BaseCurrencyNetwork.XMR_MAINNET);
+                        .defaultsTo(BaseCurrencyNetwork.TSK_MAINNET);
 
         ArgumentAcceptingOptionSpec<Boolean> ignoreLocalXmrNodeOpt = // TODO: update this to ignore local XMR node
                 parser.accepts(IGNORE_LOCAL_XMR_NODE,
@@ -410,7 +410,7 @@ public class Config {
                         .describedAs("host:port[,...]");
 
         ArgumentAcceptingOptionSpec<Boolean> useLocalhostForP2POpt =
-                parser.accepts(USE_LOCALHOST_FOR_P2P, "Use localhost P2P network for development. Only available for non-XMR_MAINNET configuration.")
+                parser.accepts(USE_LOCALHOST_FOR_P2P, "Use localhost P2P network for development. Only available for non-TSK_MAINNET configuration.")
                         .availableIf(BASE_CURRENCY_NETWORK)
                         .withRequiredArg()
                         .ofType(boolean.class)
@@ -856,7 +856,7 @@ public class Config {
 
     /**
      * Static accessor that returns either the default base currency network value of
-     * {@link BaseCurrencyNetwork#XMR_MAINNET} or the value assigned via the
+     * {@link BaseCurrencyNetwork#TSK_MAINNET} or the value assigned via the
      * {@value BASE_CURRENCY_NETWORK} option. The non-static
      * {@link #baseCurrencyNetwork} property should be favored whenever possible and
      * this static accessor should be used only in code locations where it is infeasible

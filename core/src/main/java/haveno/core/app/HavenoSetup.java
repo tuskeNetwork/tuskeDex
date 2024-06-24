@@ -301,7 +301,7 @@ public class HavenoSetup {
 
     public void start() {
         // If user tried to downgrade we require a shutdown
-        if (Config.baseCurrencyNetwork() == BaseCurrencyNetwork.XMR_MAINNET &&
+        if (Config.baseCurrencyNetwork() == BaseCurrencyNetwork.TSK_MAINNET &&
                 hasDowngraded(downGradePreventionHandler)) {
             return;
         }

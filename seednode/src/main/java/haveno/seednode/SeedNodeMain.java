@@ -168,7 +168,7 @@ public class SeedNodeMain extends ExecutableForAppWithP2p {
     private void setupConnectionLossCheck() {
         // For dev testing (usually on XMR_LOCAL) we don't want to get the seed shut
         // down as it is normal that the seed is the only actively running node.
-        if (Config.baseCurrencyNetwork() != BaseCurrencyNetwork.XMR_MAINNET) {
+        if (Config.baseCurrencyNetwork() != BaseCurrencyNetwork.TSK_MAINNET) {
             return;
         }
 

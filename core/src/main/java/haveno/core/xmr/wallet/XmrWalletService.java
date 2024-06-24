@@ -1251,7 +1251,7 @@ public class XmrWalletService {
             return MoneroNetworkType.TESTNET;
         case XMR_STAGENET:
             return MoneroNetworkType.STAGENET;
-        case XMR_MAINNET:
+        case TSK_MAINNET:
             return MoneroNetworkType.MAINNET;
         default:
             throw new RuntimeException("Unhandled base currency network: " + Config.baseCurrencyNetwork());

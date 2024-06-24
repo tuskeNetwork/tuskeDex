@@ -428,51 +428,51 @@ monerod:
 
 seednode:
 	./haveno-seednode$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=1002 \
-		--appName=haveno-XMR_MAINNET_Seed_1002 \
-		--xmrNode=http://127.0.0.1:18081 \
+		--appName=tuskeDex-TSK_MAINNET_Seed_1002 \
+		--xmrNode=http://127.0.0.1:20241 \
 
 seednode2:
 	./haveno-seednode$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=1003 \
-		--appName=haveno-XMR_MAINNET_Seed_1003 \
-		--xmrNode=http://127.0.0.1:18081 \
+		--appName=tuskeDex-TSK_MAINNET_Seed_1003 \
+		--xmrNode=http://127.0.0.1:20241 \
 
 arbitrator-daemon-mainnet:
 	# Arbitrator needs to be registered before making trades
 	./haveno-daemon$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_arbitrator \
+		--appName=tuskeDex-TSK_MAINNET_arbitrator \
 		--apiPassword=apitest \
 		--apiPort=1200 \
 		--passwordRequired=false \
-		--xmrNode=http://127.0.0.1:18081 \
+		--xmrNode=http://127.0.0.1:20241 \
 		--useNativeXmrWallet=false \
 
 arbitrator-desktop-mainnet:
 	./haveno-desktop$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_arbitrator \
+		--appName=tuskeDex-TSK_MAINNET_arbitrator \
 		--apiPassword=apitest \
 		--apiPort=1200 \
-		--xmrNode=http://127.0.0.1:18081 \
+		--xmrNode=http://127.0.0.1:20241 \
 		--useNativeXmrWallet=false \
 
 haveno-daemon-mainnet:
 	./haveno-daemon$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
@@ -484,7 +484,7 @@ haveno-daemon-mainnet:
 
 haveno-desktop-mainnet:
 	./haveno-desktop$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
@@ -496,11 +496,11 @@ haveno-desktop-mainnet:
 
 user1-daemon-mainnet:
 	./haveno-daemon$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_user1 \
+		--appName=haveno-TSK_MAINNET_user1 \
 		--apiPassword=apitest \
 		--apiPort=1202 \
 		--passwordRequired=false \
@@ -509,11 +509,11 @@ user1-daemon-mainnet:
 
 user1-desktop-mainnet:
 	./haveno-desktop$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_user1 \
+		--appName=haveno-TSK_MAINNET_user1 \
 		--apiPassword=apitest \
 		--apiPort=1202 \
 		--useNativeXmrWallet=false \
@@ -521,11 +521,11 @@ user1-desktop-mainnet:
 
 user2-daemon-mainnet:
 	./haveno-daemon$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_user2 \
+		--appName=haveno-TSK_MAINNET_user2 \
 		--apiPassword=apitest \
 		--apiPort=1203 \
 		--passwordRequired=false \
@@ -534,11 +534,11 @@ user2-daemon-mainnet:
 
 user2-desktop-mainnet:
 	./haveno-desktop$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_user2 \
+		--appName=haveno-TSK_MAINNET_user2 \
 		--apiPassword=apitest \
 		--apiPort=1203 \
 		--useNativeXmrWallet=false \
@@ -546,11 +546,11 @@ user2-desktop-mainnet:
 
 user3-desktop-mainnet:
 	./haveno-desktop$(APP_EXT) \
-		--baseCurrencyNetwork=XMR_MAINNET \
+		--baseCurrencyNetwork=TSK_MAINNET \
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-XMR_MAINNET_user3 \
+		--appName=haveno-TSK_MAINNET_user3 \
 		--apiPassword=apitest \
 		--apiPort=1204 \
 		--useNativeXmrWallet=false \

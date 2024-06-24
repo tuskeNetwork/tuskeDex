@@ -76,8 +76,8 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
         }
     }
 
-    private static final ArrayList<BlockChainExplorer> XMR_MAIN_NET_EXPLORERS = new ArrayList<>(Arrays.asList(
-            new BlockChainExplorer("xmrchain.net", "https://xmrchain.net/tx/")
+    private static final ArrayList<BlockChainExplorer> TSK_MAIN_NET_EXPLORERS = new ArrayList<>(Arrays.asList(
+            new BlockChainExplorer("explorer.tuske.network", "https://explorer.tuske.network/tx/")
     ));
     private static final ArrayList<BlockChainExplorer> XMR_STAGE_NET_EXPLORERS = new ArrayList<>(Arrays.asList(
             new BlockChainExplorer("stagenet.xmrchain.net", "https://stagenet.xmrchain.net/tx/")
@@ -233,7 +233,7 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
 
         BaseCurrencyNetwork baseCurrencyNetwork = Config.baseCurrencyNetwork();
         if ("XMR".equals(baseCurrencyNetwork.getCurrencyCode())) {
-            setBlockChainExplorerMainNet(XMR_MAIN_NET_EXPLORERS.get(0));
+            setBlockChainExplorerMainNet(TSK_MAIN_NET_EXPLORERS.get(0));
             setBlockChainExplorerStageNet(XMR_STAGE_NET_EXPLORERS.get(0));
         } else {
             throw new RuntimeException("BaseCurrencyNetwork not defined. BaseCurrencyNetwork=" + baseCurrencyNetwork);
@@ -759,7 +759,7 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
     public BlockChainExplorer getBlockChainExplorer() {
         BaseCurrencyNetwork baseCurrencyNetwork = Config.baseCurrencyNetwork();
         switch (baseCurrencyNetwork) {
-            case XMR_MAINNET:
+            case TSK_MAINNET:
                 return prefPayload.getBlockChainExplorerMainNet();
             case XMR_STAGENET:
                 return prefPayload.getBlockChainExplorerTestNet();
@@ -773,8 +773,8 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
     public ArrayList<BlockChainExplorer> getBlockChainExplorers() {
         BaseCurrencyNetwork baseCurrencyNetwork = Config.baseCurrencyNetwork();
         switch (baseCurrencyNetwork) {
-            case XMR_MAINNET:
-                return XMR_MAIN_NET_EXPLORERS;
+            case TSK_MAINNET:
+                return TSK_MAIN_NET_EXPLORERS;
             case XMR_STAGENET:
                 return XMR_STAGE_NET_EXPLORERS;
             case XMR_LOCAL:

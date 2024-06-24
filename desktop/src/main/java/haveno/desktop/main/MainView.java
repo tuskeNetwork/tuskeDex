@@ -508,7 +508,7 @@ public class MainView extends InitializableView<StackPane, MainViewModel>  {
         vBox.setId("splash");
 
         ImageView logo = new ImageView();
-        logo.setId(Config.baseCurrencyNetwork() == BaseCurrencyNetwork.XMR_MAINNET ? "image-splash-logo" : "image-splash-testnet-logo");
+        logo.setId(Config.baseCurrencyNetwork() == BaseCurrencyNetwork.TSK_MAINNET ? "image-splash-logo" : "image-splash-testnet-logo");
 
         // createBitcoinInfoBox
         xmrSplashInfo = new AutoTooltipLabel();

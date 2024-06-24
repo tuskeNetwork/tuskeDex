@@ -67,7 +67,7 @@ public class CurrencyUtilTest {
         try {
             assetRegistry.addAsset(mockTestnetCoin);
             CurrencyUtil.findAsset(assetRegistry, "MOCK_COIN",
-                    BaseCurrencyNetwork.XMR_MAINNET);
+                    BaseCurrencyNetwork.TSK_MAINNET);
             fail("Expected an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             String wantMessage = "We are on mainnet and we could not find an asset with network type mainnet";
