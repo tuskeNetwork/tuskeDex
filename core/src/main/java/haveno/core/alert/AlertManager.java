@@ -109,7 +109,10 @@ public class AlertManager {
                     "026c581ad773d987e6bd10785ac7f7e0e64864aedeb8bce5af37046de812a37854",
                     "025b058c9f2c60d839669dbfa5578cf5a8117d60e6b70e2f0946f8a691273c6a36");
         case TSK_MAINNET:
-            return List.of();
+            return List.of(
+                "03a836d010ccf41bc64147c60ebcb1d04ee383cba67c2c9f5a1f755998bb2e20de",
+                "0389e0b1944ac36e47d7936d704fe4e96c2cf2e08a3d011d8371f86e8b62fec08c",
+                "0272bee330b2fa3531f4346cac55f8046c733bb66c8659ab0781bb849d0f132874");
         default:
             throw new RuntimeException("Unhandled base currency network: " + Config.baseCurrencyNetwork());
         }

@@ -78,7 +78,11 @@ public class ArbitratorManager extends DisputeAgentManager<Arbitrator> {
                     "02a1a458df5acf4ab08fdca748e28f33a955a30854c8c1a831ee733dca7f0d2fcd",
                     "0374dd70f3fa6e47ec5ab97932e1cec6233e98e6ae3129036b17118650c44fd3de");
         case TSK_MAINNET:
-            return List.of();
+            return List.of(
+                "03a836d010ccf41bc64147c60ebcb1d04ee383cba67c2c9f5a1f755998bb2e20de",
+                "0389e0b1944ac36e47d7936d704fe4e96c2cf2e08a3d011d8371f86e8b62fec08c",
+                "0272bee330b2fa3531f4346cac55f8046c733bb66c8659ab0781bb849d0f132874"
+            );
         default:
             throw new RuntimeException("Unhandled base currency network: " + Config.baseCurrencyNetwork());
         }
