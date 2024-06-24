@@ -476,7 +476,7 @@ haveno-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=Haveno \
+		--appName=TuskeDex \
 		--apiPassword=apitest \
 		--apiPort=1201 \
 		--useNativeXmrWallet=false \
@@ -488,7 +488,7 @@ haveno-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=Haveno \
+		--appName=TuskeDex \
 		--apiPassword=apitest \
 		--apiPort=1201 \
 		--useNativeXmrWallet=false \
@@ -500,7 +500,7 @@ user1-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-TSK_MAINNET_user1 \
+		--appName=tuskeDex-TSK_MAINNET_user1 \
 		--apiPassword=apitest \
 		--apiPort=1202 \
 		--passwordRequired=false \
@@ -513,7 +513,7 @@ user1-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-TSK_MAINNET_user1 \
+		--appName=tuskeDex-TSK_MAINNET_user1 \
 		--apiPassword=apitest \
 		--apiPort=1202 \
 		--useNativeXmrWallet=false \
@@ -525,7 +525,7 @@ user2-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-TSK_MAINNET_user2 \
+		--appName=tuskeDex-TSK_MAINNET_user2 \
 		--apiPassword=apitest \
 		--apiPort=1203 \
 		--passwordRequired=false \
@@ -538,7 +538,7 @@ user2-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-TSK_MAINNET_user2 \
+		--appName=tuskeDex-TSK_MAINNET_user2 \
 		--apiPassword=apitest \
 		--apiPort=1203 \
 		--useNativeXmrWallet=false \
@@ -550,7 +550,7 @@ user3-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=haveno-TSK_MAINNET_user3 \
+		--appName=tuskeDex-TSK_MAINNET_user3 \
 		--apiPassword=apitest \
 		--apiPort=1204 \
 		--useNativeXmrWallet=false \
