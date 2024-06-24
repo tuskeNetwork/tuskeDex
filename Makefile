@@ -422,7 +422,7 @@ haveno-desktop-stagenet:
 # Mainnet network
 
 monerod:
-	./.localnet/monerod \
+	./.localnet/tusked \
 		--bootstrap-daemon-address auto \
 		--rpc-access-control-origins http://localhost:8080 \
 

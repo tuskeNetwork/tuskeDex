@@ -489,11 +489,11 @@ configure(project(':core')) {
             File monerodFile
             File moneroRpcFile
             if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                monerodFile = new File(localnetDir, 'monerod.exe')
-                moneroRpcFile = new File(localnetDir, 'monero-wallet-rpc.exe')
+                monerodFile = new File(localnetDir, 'tusked.exe')
+                moneroRpcFile = new File(localnetDir, 'tuske-wallet-rpc.exe')
             } else {
-                monerodFile = new File(localnetDir, 'monerod')
-                moneroRpcFile = new File(localnetDir, 'monero-wallet-rpc')
+                monerodFile = new File(localnetDir, 'tusked')
+                moneroRpcFile = new File(localnetDir, 'tuske-wallet-rpc')
             }
             if (ext.dependencyDownloadedAndVerified || !monerodFile.exists() || !moneroRpcFile.exists()) {
                 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
