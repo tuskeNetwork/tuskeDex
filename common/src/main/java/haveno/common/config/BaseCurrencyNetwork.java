@@ -60,7 +60,7 @@ public enum BaseCurrencyNetwork {
         return 15;  // 2021-02-22 due to mempool congestion, increased from 2
     }
 
-    private static final MonetaryFormat XMR_MONETARY_FORMAT = new MonetaryFormat().minDecimals(2).repeatOptionalDecimals(2, 3).noCode().code(0, "XMR");
+    private static final MonetaryFormat XMR_MONETARY_FORMAT = new MonetaryFormat().minDecimals(2).repeatOptionalDecimals(2, 3).noCode().code(0, "TSK");
 
     private static class XmrMainNetParams extends MainNetParams {
         @Override
