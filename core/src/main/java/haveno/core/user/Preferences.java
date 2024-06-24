@@ -232,7 +232,7 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
         setCryptoCurrencies(CurrencyUtil.getMainCryptoCurrencies());
 
         BaseCurrencyNetwork baseCurrencyNetwork = Config.baseCurrencyNetwork();
-        if ("XMR".equals(baseCurrencyNetwork.getCurrencyCode())) {
+        if ("TSK".equals(baseCurrencyNetwork.getCurrencyCode())) {
             setBlockChainExplorerMainNet(TSK_MAIN_NET_EXPLORERS.get(0));
             setBlockChainExplorerStageNet(XMR_STAGE_NET_EXPLORERS.get(0));
         } else {
