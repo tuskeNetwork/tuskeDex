@@ -1,0 +1,17 @@
+getfundingaddresses
+
+NAME
+----
+getfundingaddresses - list XMR receiving address
+
+SYNOPSIS
+--------
+getfundingaddresses
+
+DESCRIPTION
+-----------
+Returns a list of receiving XMR addresses.
+
+EXAMPLES
+--------
+$ ./haveno-cli --password=xyz --port=9998 getfundingaddresses

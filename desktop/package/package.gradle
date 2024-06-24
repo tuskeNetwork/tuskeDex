@@ -1,0 +1,384 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+import java.time.LocalDateTime
+
+task jpackageSanityChecks {
+    description 'Interactive sanity checks on the version of the code that will be packaged'
+
+    doLast {
+        if (!System.getenv("CI")) {
+            executeCmd("git --no-pager log -5 --oneline")
+            ant.input(message: "Above you see the current HEAD and its recent history.\n" +
+                    "Is this the right commit for packaging? (y=continue, n=abort)",
+                    addproperty: "sanity-check-1",
+                    validargs: "y,n")
+            if (ant.properties['sanity-check-1'] == 'n') {
+                ant.fail('Aborting')
+            }
+
+            executeCmd("git status --short --branch")
+            ant.input(message: "Above you see any local changes that are not in the remote branch.\n" +
+                    "If you have any local changes, please abort, get them merged, get the latest branch and try again.\n" +
+                    "Continue with packaging? (y=continue, n=abort)",
+                    addproperty: "sanity-check-2",
+                    validargs: "y,n")
+            if (ant.properties['sanity-check-2'] == 'n') {
+                ant.fail('Aborting')
+            }
+
+            // TODO Evtl check programmatically in gradle (i.e. fail if below v11)
+            executeCmd("java --version")
+            ant.input(message: "Above you see the installed java version, which will be used to compile and build Haveno.\n" +
+                    "Is this java version ok for that? (y=continue, n=abort)",
+                    addproperty: "sanity-check-3",
+                    validargs: "y,n")
+            if (ant.properties['sanity-check-3'] == 'n') {
+                ant.fail('Aborting')
+            }
+        } else {
+            println "CI environment detected, skipping interactive sanity checks"
+            executeCmd("git --no-pager log -5 --oneline")
+            executeCmd("git status --short --branch")
+            executeCmd("java --version")
+        }
+    }
+}
+
+task getJavaBinariesDownloadURLs {
+    description 'Find out which JDK will be used for jpackage and prepare to download it'
+    dependsOn 'jpackageSanityChecks'
+
+    doLast {
+        // The build directory will be deleted next time the clean task runs
+        // Therefore, we can use it to store any temp files (separate JDK for jpackage, etc) and resulting build artefacts
+        // We create a temp folder in the build directory which holds all jpackage-related artefacts (not just the final installers)
+        String tempRootDirName = 'temp-' + LocalDateTime.now().format('yyyy.MM.dd-HHmmssSSS')
+        File tempRootDir = new File(project.buildDir, tempRootDirName)
+        tempRootDir.mkdirs()
+        ext.tempRootDir = tempRootDir
+        println "Created temp root folder " + tempRootDir
+
+        File binariesFolderPath = new File(tempRootDir, "binaries")
+        binariesFolderPath.mkdirs()
+        ext.binariesFolderPath = binariesFolderPath
+
+        // Define the download URLs (and associated binary hashes) for the JDK used to package the installers
+        // These JDKs are independent of what is installed on the building system
+        //
+        // If these specific versions are not hosted by AdoptOpenJDK anymore, or if different versions are desired,
+        // simply update the links and associated hashes below
+        //
+        // See https://adoptopenjdk.net/releases.html?variant=openjdk15&jvmVariant=hotspot for latest download URLs
+        // On the download page linked above, filter as follows to get the binary URL + associated SHA256:
+        // - architecture: x64
+        // - operating system:
+        // -- linux   ( -> use the tar.gz JDK link)
+        // -- macOS   ( -> use the tar.gz JDK link)
+        // -- windows ( -> use the .zip JDK link)
+        Map jdk21Binaries = [
+                'linux'                 : 'https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-linux-amd64-full.tar.gz',
+                'linux-sha256'          : '7eda80851fba1da023e03446c77100f19e7c770491b0d5bc9f893044e1b2b69b',
+                'linux-aarch64'         : 'https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-linux-aarch64-full.tar.gz',
+                'linux-aarch64-sha256'  : 'a477fc72085f30b03bf71fbed47923cea3b6f33b5b6a5a74718623b772a3a043',
+                'mac'                   : 'https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-amd64-full.tar.gz',
+                'mac-sha256'            : '42b528206595e559803b6f9f6bdbbf236ec6d10684058f46bc5261f5498d345c',
+                'mac-aarch64'           : 'https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-aarch64-full.tar.gz',
+                'mac-aarch64-sha256'    : 'eba73a9bff7234220dc9a1da7f44b3d7ed2a562663eadc1c53bd74b355839a55',
+                'windows'               : 'https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-windows-amd64-full.zip',
+                'windows-sha256'        : 'f823eff0234af5bef095e53e5431191dbee8c2e42ca321eda23148a15cbf8d5b',
+                'windows-aarch64'       : 'https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-windows-aarch64-full.zip',
+                'windows-aarch64-sha256': 'a2e9edecaf9637f83ef1cddab3a74f39ac55f8e1a479f10f3584ad939dfadd0a'
+        ]
+
+        String osKey
+        String architecture = System.getProperty("os.arch").toLowerCase()
+
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            if (architecture.contains("aarch64") || architecture.contains("arm")) {
+                osKey = "windows-aarch64"
+            } else {
+                osKey = "windows"
+            }
+        } else if (Os.isFamily(Os.FAMILY_MAC)) {
+            if (architecture.contains("aarch64") || architecture.contains("arm")) {
+                osKey = "mac-aarch64"
+            } else {
+                osKey = "mac"
+            }
+        } else {
+            if (architecture.contains("aarch64") || architecture.contains("arm")) {
+                osKey = "linux-aarch64"
+            } else {
+                osKey = "linux"
+            }
+        }
+
+        ext.jdk21Binary_DownloadURL = jdk21Binaries[osKey]
+        ext.jdk21Binary_SHA256Hash = jdk21Binaries[osKey + '-sha256']
+    }
+}
+
+task retrieveAndExtractJavaBinaries {
+    description 'Retrieve necessary Java binaries and extract them'
+    dependsOn 'getJavaBinariesDownloadURLs'
+
+    doLast {
+        File tempRootDir = getJavaBinariesDownloadURLs.property("tempRootDir") as File
+
+        // Folder where the jpackage JDK archive will be downloaded and extracted
+        String jdkForJpackageDirName = "jdk-jpackage"
+        File jdkForJpackageDir = new File(tempRootDir, jdkForJpackageDirName)
+        jdkForJpackageDir.mkdirs()
+
+        String jdkForJpackageArchiveURL = getJavaBinariesDownloadURLs.property('jdk21Binary_DownloadURL')
+        String jdkForJpackageArchiveHash = getJavaBinariesDownloadURLs.property('jdk21Binary_SHA256Hash')
+        String jdkForJpackageArchiveFileName = jdkForJpackageArchiveURL.tokenize('/').last()
+        File jdkForJpackageFile = new File(jdkForJpackageDir, jdkForJpackageArchiveFileName)
+
+        // Download necessary JDK binaries + verify hash
+        ext.downloadAndVerifyArchive(jdkForJpackageArchiveURL, jdkForJpackageArchiveHash, jdkForJpackageFile)
+
+        // Extract them
+        String jpackageBinaryFileName
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            ext.extractArchiveZip(jdkForJpackageFile, jdkForJpackageDir)
+            jpackageBinaryFileName = 'jpackage.exe'
+        } else {
+            ext.extractArchiveTarGz(jdkForJpackageFile, jdkForJpackageDir)
+            jpackageBinaryFileName = 'jpackage'
+        }
+
+        // Find jpackage in the newly extracted JDK
+        // Don't rely on hardcoded paths to reach it, because the path depends on the version and platform
+        jdkForJpackageDir.traverse(type: groovy.io.FileType.FILES, nameFilter: jpackageBinaryFileName) {
+            println 'Using jpackage binary from ' + it
+            ext.jpackageFilePath = it.path
+        }
+    }
+
+    ext.downloadAndVerifyArchive = { String archiveURL, String archiveSHA256, File destinationArchiveFile ->
+        println "Downloading ${archiveURL}"
+        ant.get(src: archiveURL, dest: destinationArchiveFile)
+        println 'Download saved to ' + destinationArchiveFile
+
+        println 'Verifying checksum for downloaded binary ...'
+        ant.jdkHash = archiveSHA256
+        ant.checksum(file: destinationArchiveFile, algorithm: 'SHA-256', property: '${jdkHash}', verifyProperty: 'hashMatches')
+        if (ant.properties['hashMatches'] != 'true') {
+            ant.fail('Checksum mismatch: Downloaded JDK binary has a different checksum than expected')
+        }
+        println 'Checksum verified'
+    }
+
+    ext.extractArchiveTarGz = { File tarGzFile, File destinationDir ->
+        println "Extracting tar.gz ${tarGzFile}"
+        // Gradle's tar extraction preserves permissions (crucial for jpackage to function correctly)
+        copy {
+            from tarTree(resources.gzip(tarGzFile))
+            into destinationDir
+        }
+        println "Extracted to ${destinationDir}"
+    }
+
+    ext.extractArchiveZip = { File zipFile, File destinationDir ->
+        println "Extracting zip ${zipFile}..."
+        ant.unzip(src: zipFile, dest: destinationDir)
+        println "Extracted to ${destinationDir}"
+    }
+}
+
+task packageInstallers {
+    description 'Call jpackage to prepare platform-specific binaries for this platform'
+    dependsOn 'retrieveAndExtractJavaBinaries'
+    // Clean all previous artifacts and create a fresh shadowJar for the installers
+    dependsOn rootProject.clean
+    dependsOn ':core:havenoDeps'
+    dependsOn ':desktop:shadowJar'
+
+    doLast {
+        String jPackageFilePath = retrieveAndExtractJavaBinaries.property('jpackageFilePath')
+        File binariesFolderPath = file(getJavaBinariesDownloadURLs.property('binariesFolderPath'))
+
+        File tempRootDir = getJavaBinariesDownloadURLs.property("tempRootDir") as File
+        // The jpackageTempDir stores temp files used by jpackage for building the installers
+        // It can be inspected in order to troubleshoot the packaging process
+        File jpackageTempDir = new File(tempRootDir, "jpackage-temp")
+        jpackageTempDir.mkdirs()
+
+        // ALL contents of this folder will be included in the resulting installers
+        // However, the fat jar is the only one we need
+        // Therefore, this location should point to a folder that ONLY contains the fat jar
+        // If later we will need to include other non-jar resources, we can do that by adding --resource-dir to the jpackage opts
+        String fatJarFolderPath = "${project(':desktop').buildDir}/libs/fatJar"
+        String mainJarName = shadowJar.getArchiveFileName().get()
+
+        delete(fatJarFolderPath)
+        mkdir(fatJarFolderPath)
+        copy {
+            from "${project(':desktop').buildDir}/libs/${mainJarName}"
+            into fatJarFolderPath
+        }
+
+        // We convert the fat jar into a deterministic one by stripping out comments with date, etc.
+        // jar file created from https://github.com/ManfredKarrer/tools
+        executeCmd("java -jar \"${project(':desktop').projectDir}/package/tools-1.0.jar\" ${fatJarFolderPath}/${mainJarName}")
+
+        // Store deterministic jar SHA-256
+        ant.checksum(file: "${fatJarFolderPath}/${mainJarName}", algorithm: 'SHA-256')
+        copy {
+            from "${fatJarFolderPath}/${mainJarName}.SHA-256"
+            into binariesFolderPath
+        }
+
+        // TODO For non-modular applications: use jlink to create a custom runtime containing only the modules required
+
+        // See jpackager argument documentation:
+        // https://docs.oracle.com/en/java/javase/15/docs/specs/man/jpackage.html
+
+        // Remove the -SNAPSHOT suffix from the version string (originally defined in build.gradle)
+        // Having it in would have resulted in an invalid version property for several platforms (mac, linux/rpm)
+        String appVersion = version.replaceAll("-SNAPSHOT", "")
+        println "Packaging Haveno version ${appVersion}"
+
+        // zip jar lib for Raspberry Pi only on macOS as there are path issues on Windows and it is only needed once
+        // for the release
+        if (Os.isFamily(Os.FAMILY_MAC)) {
+            println "Zipping jar lib for raspberry pi"
+            ant.zip(basedir: "${project(':desktop').buildDir}/app/lib",
+                    destfile: "${binariesFolderPath}/jar-lib-for-raspberry-pi-${appVersion}.zip")
+        }
+
+        //String appDescription = 'A decentralized monero exchange network.'
+        String appCopyright = '© 2024 Haveno'
+        String appNameAndVendor = 'Haveno'
+
+        String commonOpts = new String(
+                // Generic options
+                " --dest \"${binariesFolderPath}\"" +
+                        " --name ${appNameAndVendor}" +
+                        //" --description \"${appDescription}\"" + // TODO: task managers show app description instead of name, so we disable it
+                        " --app-version ${appVersion}" +
+                        " --copyright \"${appCopyright}\"" +
+                        " --vendor ${appNameAndVendor}" +
+                        " --temp \"${jpackageTempDir}\"" +
+
+                        // Options for creating the application image
+                        " --input ${fatJarFolderPath}" +
+
+                        // Options for creating the application launcher
+                        " --main-jar ${mainJarName}" +
+                        " --main-class haveno.desktop.app.HavenoAppMain" +
+                        " --java-options -Xss1280k" +
+                        " --java-options -XX:MaxRAM=4g" +
+                        " --java-options --add-opens=javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED" +
+                        " --java-options --add-opens=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED" +
+                        " --java-options --add-opens=java.base/java.lang.reflect=ALL-UNNAMED" +
+                        " --java-options --add-opens=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED" +
+                        " --java-options -Djava.net.preferIPv4Stack=true" +
+                        " --arguments --baseCurrencyNetwork=XMR_STAGENET"
+                // Warning: this will cause guice reflection exceptions and lead to issues with the guice internal cache
+                // resulting in the UI not loading
+//              " --java-options -Djdk.module.illegalAccess=deny" +
+        )
+
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            String windowsOpts = new String(
+                    " --icon \"${project(':desktop').projectDir}/package/windows/Haveno.ico\"" +
+                            " --resource-dir \"${project(':desktop').projectDir}/package/windows\"" +
+                            " --win-dir-chooser" +
+                            " --win-per-user-install" +
+                            " --win-menu" +
+                            " --win-shortcut"
+            )
+
+            executeCmd(jPackageFilePath + commonOpts + windowsOpts + " --verbose > desktop/build/output.txt --type exe")
+        } else if (Os.isFamily(Os.FAMILY_MAC)) {
+            // See https://docs.oracle.com/en/java/javase/14/jpackage/override-jpackage-resources.html
+            // for details of "--resource-dir"
+
+            String macOpts = new String(
+                    " --resource-dir \"${project(':desktop').projectDir}/package/macosx\""
+            )
+
+            executeCmd(jPackageFilePath + commonOpts + macOpts + " --type dmg")
+        } else {
+            String linuxOpts = new String(
+                    " --icon ${project(':desktop').projectDir}/package/linux/icon.png" +
+                            // This defines the first part of the resulting packages (the application name)
+                            // deb requires lowercase letters, therefore the application name is written in lowercase
+                            " --linux-package-name haveno" +
+
+                            // This represents the linux package version (revision)
+                            // By convention, this is part of the deb/rpm package names, in addition to the software version
+                            " --linux-app-release 1" +
+
+                            " --linux-menu-group Network" +
+                            " --linux-shortcut"
+            )
+
+            // Package deb
+            executeCmd(jPackageFilePath + commonOpts + linuxOpts +
+                    " --linux-deb-maintainer noreply@haveno.exchange" +
+                    " --type deb")
+
+            // Clean jpackage temp folder, needs to be empty for the next packaging step (rpm)
+            jpackageTempDir.deleteDir()
+            jpackageTempDir.mkdirs()
+
+            // Package rpm
+            executeCmd(jPackageFilePath + commonOpts + linuxOpts +
+                    " --linux-rpm-license-type AGPLv3" + // https://fedoraproject.org/wiki/Licensing:Main?rd=Licensing#Good_Licenses
+                    " --type rpm")
+        }
+
+        // Env variable can be set by calling "export HAVENO_SHARED_FOLDER='Some value'"
+        // This is to copy the final binary/ies to a shared folder for further processing if a VM is used.
+        String envVariableSharedFolder = "$System.env.HAVENO_SHARED_FOLDER"
+        println "Environment variable HAVENO_SHARED_FOLDER is: ${envVariableSharedFolder}"
+
+        if (envVariableSharedFolder != "null") {
+            ant.input(message: "Copy the created binary to a shared folder? (y=yes, n=no)",
+                    addproperty: "copy-to-shared-folder",
+                    validargs: "y,n")
+            if (ant.properties['copy-to-shared-folder'] == 'y') {
+                copy {
+                    from binariesFolderPath
+                    into envVariableSharedFolder
+                }
+                executeCmd("open " + envVariableSharedFolder)
+            }
+        }
+
+        println "The binaries are ready:"
+        binariesFolderPath.traverse {
+            println it.path
+        }
+    }
+}
+
+def executeCmd(String cmd) {
+    String shell
+    String shellArg
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        shell = 'cmd'
+        shellArg = '/c'
+    } else {
+        shell = 'bash'
+        shellArg = '-c'
+    }
+
+    println "Executing command:\n${cmd}\n"
+    // See "Executing External Processes" section of
+    // http://docs.groovy-lang.org/next/html/documentation/
+    def commands = [shell, shellArg, cmd]
+    def process = commands.execute(null, project.rootDir)
+    def result
+    if (process.waitFor() == 0) {
+        result = process.text
+        println "Command output (stdout):\n${result}"
+    } else {
+        result = process.err.text
+        println "Command output (stderr):\n${result}"
+    }
+    return result
+}
