@@ -825,7 +825,7 @@ public class XmrWalletService {
         MoneroFeeEstimate feeEstimates = getDaemon().getFeeEstimate();
         BigInteger baseFeeEstimate = feeEstimates.getFees().get(2); // get elevated fee per kB
         BigInteger qmask = feeEstimates.getQuantizationMask();
-        log.info("Monero base fee estimate={}, qmask={}: " + baseFeeEstimate, qmask);
+        log.info("Tuske base fee estimate={}, qmask={}: " + baseFeeEstimate, qmask);
 
         // get tx base fee
         BigInteger baseFee = baseFeeEstimate.multiply(BigInteger.valueOf(txWeight));
@@ -1273,10 +1273,10 @@ public class XmrWalletService {
             try {
                 MoneroUtils.loadNativeLibrary();
             } catch (Exception | UnsatisfiedLinkError e) {
-                log.warn("Failed to load Monero native libraries: " + e.getMessage());
+                log.warn("Failed to load Tuske native libraries: " + e.getMessage());
             }
         }
-        String appliedMsg = "Monero native libraries applied: " + isNativeLibraryApplied();
+        String appliedMsg = "Tuske native libraries applied: " + isNativeLibraryApplied();
         if (useNativeXmrWallet && !isNativeLibraryApplied()) log.warn(appliedMsg);
         else log.info(appliedMsg);
 
@@ -1349,7 +1349,7 @@ public class XmrWalletService {
 
             // sync wallet and register listener
             if (wallet != null && !isShutDownStarted) {
-                log.info("Monero wallet path={}", wallet.getPath());
+                log.info("Tuske wallet path={}", wallet.getPath());
 
                 // sync main wallet if applicable
                 if (sync && numAttempts > 0) {
@@ -1366,7 +1366,7 @@ public class XmrWalletService {
                         if (getMoneroNetworkType() != MoneroNetworkType.MAINNET) {
                             BigInteger balance = getBalance();
                             BigInteger unlockedBalance = getAvailableBalance();
-                            log.info("Monero wallet unlocked balance={}, pending balance={}, total balance={}", unlockedBalance, balance.subtract(unlockedBalance), balance);
+                            log.info("Tuske wallet unlocked balance={}, pending balance={}, total balance={}", unlockedBalance, balance.subtract(unlockedBalance), balance);
                         }
 
                         // reapply connection after wallet synced
@@ -1416,7 +1416,7 @@ public class XmrWalletService {
         getAddressEntryListAsImmutableList(); // TODO: using getter to create base address if necessary
         List<XmrAddressEntry> baseAddresses = getAddressEntries(XmrAddressEntry.Context.BASE_ADDRESS);
         if (baseAddresses.size() > 1 || (baseAddresses.size() == 1 && !baseAddresses.get(0).getAddressString().equals(wallet.getPrimaryAddress()))) {
-            String warningMsg = "New Monero wallet detected. Resetting internal state.";
+            String warningMsg = "New Tuske wallet detected. Resetting internal state.";
             if (!tradeManager.getOpenTrades().isEmpty()) warningMsg += "\n\nWARNING: Your open trades will settle to the payout address in the OLD wallet!"; // TODO: allow payout address to be updated in PaymentSentMessage, PaymentReceivedMessage, and DisputeOpenedMessage?
             HavenoUtils.havenoSetup.getTopErrorMsg().set(warningMsg);
 

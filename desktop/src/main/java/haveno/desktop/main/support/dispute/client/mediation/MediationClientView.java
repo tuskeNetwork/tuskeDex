@@ -105,7 +105,7 @@ public class MediationClientView extends DisputeClientView {
 
     @Override
     protected NodeAddress getAgentNodeAddress(Contract contract) {
-        throw new RuntimeException("MediationClientView.getAgentNodeAddress() not implementd for XMR");
+        throw new RuntimeException("MediationClientView.getAgentNodeAddress() not implementd for TSK");
         //return contract.getMediatorNodeAddress();
     }
 

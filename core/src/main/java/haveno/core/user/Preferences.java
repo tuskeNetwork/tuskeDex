@@ -278,8 +278,8 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
 
         if (xmrNodesFromOptions != null && !xmrNodesFromOptions.isEmpty()) {
             if (getMoneroNodes() != null && !getMoneroNodes().equals(xmrNodesFromOptions)) {
-                log.warn("The Monero node(s) from the program argument and the one(s) persisted in the UI are different. " +
-                        "The Monero node(s) {} from the program argument will be used.", xmrNodesFromOptions);
+                log.warn("The Tuske node(s) from the program argument and the one(s) persisted in the UI are different. " +
+                        "The Tuske node(s) {} from the program argument will be used.", xmrNodesFromOptions);
             }
             setMoneroNodes(xmrNodesFromOptions);
             setMoneroNodesOptionOrdinal(XmrNodes.MoneroNodesOption.CUSTOM.ordinal());
@@ -300,7 +300,7 @@ public final class Preferences implements PersistedDataHost, BridgeAddressProvid
 
         if (prefPayload.getAutoConfirmSettingsList().isEmpty()) {
             List<String> defaultXmrTxProofServices = getDefaultXmrTxProofServices();
-            AutoConfirmSettings.getDefault(defaultXmrTxProofServices, "XMR")
+            AutoConfirmSettings.getDefault(defaultXmrTxProofServices, "TSK")
                     .ifPresent(xmrAutoConfirmSettings -> {
                         getAutoConfirmSettingsList().add(xmrAutoConfirmSettings);
                     });

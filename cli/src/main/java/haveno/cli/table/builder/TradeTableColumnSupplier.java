@@ -98,7 +98,7 @@ class TradeTableColumnSupplier {
     private final Supplier<Boolean> isClosedTradeTblBuilder = () -> getTableType().equals(CLOSED_TRADES_TBL);
     private final Supplier<Boolean> isFailedTradeTblBuilder = () -> getTableType().equals(FAILED_TRADES_TBL);
     private final Supplier<TradeInfo> firstRow = () -> getTrades().get(0);
-    private final Predicate<OfferInfo> isTraditionalOffer = (o) -> o.getBaseCurrencyCode().equals("XMR");
+    private final Predicate<OfferInfo> isTraditionalOffer = (o) -> o.getBaseCurrencyCode().equals("TSK");
     private final Predicate<TradeInfo> isTraditionalTrade = (t) -> isTraditionalOffer.test(t.getOffer());
     private final Predicate<TradeInfo> isTaker = (t) -> t.getRole().toLowerCase().contains("taker");
 
@@ -212,7 +212,7 @@ class TradeTableColumnSupplier {
     final Supplier<Column<Long>> havenoTradeDetailFeeColumn = () -> {
         if (isTradeDetailTblBuilder.get()) {
             TradeInfo t = firstRow.get();
-            String headerCurrencyCode = "XMR";
+            String headerCurrencyCode = "TSK";
             String colHeader = isTaker.test(t)
                     ? format(COL_HEADER_TRADE_TAKER_FEE, headerCurrencyCode)
                     : format(COL_HEADER_TRADE_MAKER_FEE, headerCurrencyCode);

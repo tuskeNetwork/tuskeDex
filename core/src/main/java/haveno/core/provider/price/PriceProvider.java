@@ -62,7 +62,7 @@ public class PriceProvider extends HttpClientProvider {
                 LinkedTreeMap<?, ?> treeMap = (LinkedTreeMap<?, ?>) obj;
                 String baseCurrencyCode = (String) treeMap.get("baseCurrencyCode");
                 String counterCurrencyCode = (String) treeMap.get("counterCurrencyCode");
-                String currencyCode = baseCurrencyCode.equals("XMR") ? counterCurrencyCode : baseCurrencyCode;
+                String currencyCode = baseCurrencyCode.equals("TSK") ? counterCurrencyCode : baseCurrencyCode;
                 double price = (Double) treeMap.get("price");
                 // json uses double for our timestampSec long value...
                 long timestampSec = MathUtils.doubleToLong((Double) treeMap.get("timestampSec"));

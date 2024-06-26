@@ -201,14 +201,14 @@ public class ContractWindow extends Overlay<ContractWindow> {
                     title = Res.get("shared.selectedArbitrator");
                     break;
                 case MEDIATION:
-                    throw new RuntimeException("Mediation type not adapted to XMR");
+                    throw new RuntimeException("Mediation type not adapted to TSK");
 //                    agentMatrixUserName = DisputeAgentLookupMap.getMatrixUserName(contract.getMediatorNodeAddress().getFullAddress());
 //                    title = Res.get("shared.selectedMediator");
 //                    break;
                 case TRADE:
                     break;
                 case REFUND:
-                    throw new RuntimeException("Refund type not adapted to XMR");
+                    throw new RuntimeException("Refund type not adapted to TSK");
 //                    agentMatrixUserName = DisputeAgentLookupMap.getMatrixUserName(contract.getRefundAgentNodeAddress().getFullAddress());
 //                    title = Res.get("shared.selectedRefundAgent");
 //                    break;

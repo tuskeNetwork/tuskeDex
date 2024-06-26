@@ -22,6 +22,7 @@ import com.google.inject.name.Named;
 import haveno.asset.Asset;
 import haveno.asset.CryptoAccountDisclaimer;
 import haveno.asset.coins.Monero;
+import haveno.asset.coins.Tuske;
 import haveno.common.util.Tuple2;
 import haveno.common.util.Tuple3;
 import haveno.core.account.witness.AccountAgeWitnessService;

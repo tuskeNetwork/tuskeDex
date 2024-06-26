@@ -360,7 +360,7 @@ public class HavenoSetup {
             File monerodFile = new File(XmrLocalNode.MONEROD_PATH);
             String monerodResourcePath = "bin/" + XmrLocalNode.MONEROD_NAME;
             if (!monerodFile.exists() || !FileUtil.resourceEqualToFile(monerodResourcePath, monerodFile)) {
-                log.info("Installing monerod");
+                log.info("Installing tusked");
                 monerodFile.getParentFile().mkdirs();
                 FileUtil.resourceToFile("bin/" + XmrLocalNode.MONEROD_NAME, monerodFile);
                 monerodFile.setExecutable(true);
@@ -370,14 +370,14 @@ public class HavenoSetup {
             File moneroWalletRpcFile = new File(XmrWalletService.MONERO_WALLET_RPC_PATH);
             String moneroWalletRpcResourcePath = "bin/" + XmrWalletService.MONERO_WALLET_RPC_NAME;
             if (!moneroWalletRpcFile.exists() || !FileUtil.resourceEqualToFile(moneroWalletRpcResourcePath, moneroWalletRpcFile)) {
-                log.info("Installing monero-wallet-rpc");
+                log.info("Installing tuske-wallet-rpc");
                 moneroWalletRpcFile.getParentFile().mkdirs();
                 FileUtil.resourceToFile(moneroWalletRpcResourcePath, moneroWalletRpcFile);
                 moneroWalletRpcFile.setExecutable(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.warn("Failed to install Monero binaries: " + e.toString());
+            log.warn("Failed to install Tuske binaries: " + e.toString());
         }
     }
 

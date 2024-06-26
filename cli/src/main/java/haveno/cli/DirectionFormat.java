@@ -30,7 +30,7 @@ import static protobuf.OfferDirection.SELL;
 class DirectionFormat {
 
     static int getLongestDirectionColWidth(List<OfferInfo> offers) {
-        if (offers.isEmpty() || offers.get(0).getBaseCurrencyCode().equals("XMR"))
+        if (offers.isEmpty() || offers.get(0).getBaseCurrencyCode().equals("TSK"))
             return COL_HEADER_DIRECTION.length();
         else
             return 18;  // .e.g., "Sell BSQ (Buy XMR)".length()
@@ -38,7 +38,7 @@ class DirectionFormat {
 
     static final Function<OfferInfo, String> directionFormat = (offer) -> {
         String baseCurrencyCode = offer.getBaseCurrencyCode();
-        boolean isCryptoCurrencyOffer = !baseCurrencyCode.equals("XMR");
+        boolean isCryptoCurrencyOffer = !baseCurrencyCode.equals("TSK");
         if (!isCryptoCurrencyOffer) {
             return baseCurrencyCode;
         } else {

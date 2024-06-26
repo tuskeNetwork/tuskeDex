@@ -136,7 +136,7 @@ class CoreWalletsService {
 
         switch (currencyCode.trim().toUpperCase()) {
             case "":
-            case "XMR":
+            case "TSK":
                 return new BalancesInfo(BtcBalanceInfo.EMPTY, getXmrBalances());
             default:
                 throw new IllegalStateException("Unsupported currency code: " + currencyCode.trim().toUpperCase());

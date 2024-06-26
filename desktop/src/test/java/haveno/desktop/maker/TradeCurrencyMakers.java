@@ -33,7 +33,7 @@ public class TradeCurrencyMakers {
     public static final Property<TradeCurrency, String> currencyName = new Property<>();
 
     public static final Instantiator<haveno.core.locale.CryptoCurrency> CryptoCurrency = lookup ->
-            new CryptoCurrency(lookup.valueOf(currencyCode, "XMR"), lookup.valueOf(currencyName, "Monero"));
+            new CryptoCurrency(lookup.valueOf(currencyCode, "TSK"), lookup.valueOf(currencyName, "Tuske"));
 
     public static final Instantiator<haveno.core.locale.TraditionalCurrency> TraditionalCurrency = lookup ->
             new TraditionalCurrency(lookup.valueOf(currencyCode, "EUR"));

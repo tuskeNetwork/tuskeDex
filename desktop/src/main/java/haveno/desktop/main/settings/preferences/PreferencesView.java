@@ -572,14 +572,14 @@ public class PreferencesView extends ActivatableViewAndModel<GridPane, Preferenc
                     }
                 });
 
-                preferences.setAutoConfServiceAddresses("XMR", serviceAddressesParsed);
+                preferences.setAutoConfServiceAddresses("TSK", serviceAddressesParsed);
             }
         };
 
         autoConfTradeLimitListener = (observable, oldValue, newValue) -> {
             if (!newValue.equals(oldValue) && autoConfTradeLimitTf.getValidator().validate(newValue).isValid) {
                 BigInteger amount = HavenoUtils.parseXmr(newValue);
-                preferences.setAutoConfTradeLimit("XMR", amount.longValueExact());
+                preferences.setAutoConfTradeLimit("TSK", amount.longValueExact());
             }
         };
 
@@ -587,7 +587,7 @@ public class PreferencesView extends ActivatableViewAndModel<GridPane, Preferenc
             if (oldValue && !newValue) {
                 log.info("Service address focus out, check and re-display default option");
                 if (autoConfServiceAddressTf.getText().isEmpty()) {
-                    preferences.findAutoConfirmSettings("XMR").ifPresent(autoConfirmSettings -> {
+                    preferences.findAutoConfirmSettings("TSK").ifPresent(autoConfirmSettings -> {
                         List<String> serviceAddresses = autoConfirmSettings.getServiceAddresses();
                         autoConfServiceAddressTf.setText(String.join(", ", serviceAddresses));
                     });
@@ -608,9 +608,9 @@ public class PreferencesView extends ActivatableViewAndModel<GridPane, Preferenc
                 String txt = autoConfRequiredConfirmationsTf.getText();
                 if (autoConfRequiredConfirmationsTf.getValidator().validate(txt).isValid) {
                     int requiredConfirmations = Integer.parseInt(txt);
-                    preferences.setAutoConfRequiredConfirmations("XMR", requiredConfirmations);
+                    preferences.setAutoConfRequiredConfirmations("TSK", requiredConfirmations);
                 } else {
-                    preferences.findAutoConfirmSettings("XMR")
+                    preferences.findAutoConfirmSettings("TSK")
                             .ifPresent(e -> autoConfRequiredConfirmationsTf
                                     .setText(String.valueOf(e.getRequiredConfirmations())));
                 }
@@ -769,7 +769,7 @@ public class PreferencesView extends ActivatableViewAndModel<GridPane, Preferenc
         resetDontShowAgainButton.setOnAction(e -> preferences.resetDontShowAgain());
 
         editCustomBtcExplorer.setOnAction(e -> {
-            EditCustomExplorerWindow urlWindow = new EditCustomExplorerWindow("XMR",
+            EditCustomExplorerWindow urlWindow = new EditCustomExplorerWindow("TSK",
                     preferences.getBlockChainExplorer(), preferences.getBlockChainExplorers());
             urlWindow
                     .actionButtonText(Res.get("shared.save"))
@@ -793,7 +793,7 @@ public class PreferencesView extends ActivatableViewAndModel<GridPane, Preferenc
     }
 
     private void activateAutoConfirmPreferences() {
-        preferences.findAutoConfirmSettings("XMR").ifPresent(autoConfirmSettings -> {
+        preferences.findAutoConfirmSettings("TSK").ifPresent(autoConfirmSettings -> {
             autoConfirmXmrToggle.setSelected(autoConfirmSettings.isEnabled());
             autoConfRequiredConfirmationsTf.setText(String.valueOf(autoConfirmSettings.getRequiredConfirmations()));
             autoConfTradeLimitTf.setText(HavenoUtils.formatXmr(autoConfirmSettings.getTradeLimit()));
@@ -845,7 +845,7 @@ public class PreferencesView extends ActivatableViewAndModel<GridPane, Preferenc
     }
 
     private void deactivateAutoConfirmPreferences() {
-        preferences.findAutoConfirmSettings("XMR").ifPresent(autoConfirmSettings -> {
+        preferences.findAutoConfirmSettings("TSK").ifPresent(autoConfirmSettings -> {
             autoConfirmXmrToggle.setOnAction(null);
             autoConfTradeLimitTf.textProperty().removeListener(autoConfTradeLimitListener);
             autoConfServiceAddressTf.textProperty().removeListener(autoConfServiceAddressListener);

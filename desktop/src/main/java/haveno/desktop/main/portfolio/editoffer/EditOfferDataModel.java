@@ -236,6 +236,6 @@ class EditOfferDataModel extends MutableOfferDataModel {
 
     @Override
     protected Set<PaymentAccount> getUserPaymentAccounts() {
-        throw new RuntimeException("Edit offer not supported with XMR");
+        throw new RuntimeException("Edit offer not supported with TSK");
     }
 }

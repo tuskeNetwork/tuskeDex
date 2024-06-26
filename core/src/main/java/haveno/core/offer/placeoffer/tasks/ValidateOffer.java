@@ -69,7 +69,7 @@ public class ValidateOffer extends Task<PlaceOfferModel> {
 
             long maxAmount = model.getAccountAgeWitnessService().getMyTradeLimit(model.getUser().getPaymentAccount(offer.getMakerPaymentAccountId()), offer.getCurrencyCode(), offer.getDirection());
             checkArgument(offer.getAmount().longValueExact() <= maxAmount,
-                    "Amount is larger than " + HavenoUtils.atomicUnitsToXmr(offer.getPaymentMethod().getMaxTradeLimit(offer.getCurrencyCode())) + " XMR");
+                    "Amount is larger than " + HavenoUtils.atomicUnitsToXmr(offer.getPaymentMethod().getMaxTradeLimit(offer.getCurrencyCode())) + " TSK");
             checkArgument(offer.getAmount().compareTo(offer.getMinAmount()) >= 0, "MinAmount is larger than Amount");
 
             checkNotNull(offer.getPrice(), "Price is null");

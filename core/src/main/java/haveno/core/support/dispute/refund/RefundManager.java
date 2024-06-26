@@ -220,7 +220,7 @@ public final class RefundManager extends DisputeManager<RefundDisputeList> {
     @Nullable
     @Override
     public NodeAddress getAgentNodeAddress(Dispute dispute) {
-      throw new RuntimeException("Refund manager not used in XMR adapation");
+      throw new RuntimeException("Refund manager not used in TSK adapation");
         //return dispute.getContract().getRefundAgentNodeAddress();
     }
 }

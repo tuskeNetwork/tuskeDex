@@ -79,7 +79,7 @@ public class TradeUtil {
      * @return Tuple2 tuple containing MULTI_SIG, TRADE_PAYOUT addresses for trade
      */
     public Tuple2<String, String> getTradeAddresses(Trade trade) {
-        throw new RuntimeException("TradeUtil.getTradeAddresses() not implemented for XMR");
+        throw new RuntimeException("TradeUtil.getTradeAddresses() not implemented for TSK");
 //        var contract = trade.getContract();
 //        if (contract == null)
 //            return null;

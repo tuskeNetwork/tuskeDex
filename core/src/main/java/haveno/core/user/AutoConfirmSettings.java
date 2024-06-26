@@ -46,13 +46,13 @@ public final class AutoConfirmSettings implements PersistablePayload {
     static Optional<AutoConfirmSettings> getDefault(List<String> serviceAddresses, String currencyCode) {
         //noinspection SwitchStatementWithTooFewBranches
         switch (currencyCode) {
-            case "XMR":
+            case "TSK":
                 return Optional.of(new AutoConfirmSettings(
                         false,
                         5,
                         Coin.COIN.value,
                         serviceAddresses,
-                        "XMR"));
+                        "TSK"));
             default:
                 log.error("No AutoConfirmSettings supported yet for currency {}", currencyCode);
                 return Optional.empty();

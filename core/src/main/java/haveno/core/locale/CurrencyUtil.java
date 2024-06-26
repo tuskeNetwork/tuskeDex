@@ -66,12 +66,12 @@ import static java.lang.String.format;
 @Slf4j
 public class CurrencyUtil {
     public static void setup() {
-        setBaseCurrencyCode("XMR");
+        setBaseCurrencyCode("TSK");
     }
 
     private static final AssetRegistry assetRegistry = new AssetRegistry();
 
-    private static String baseCurrencyCode = "XMR";
+    private static String baseCurrencyCode = "TSK";
 
     private static List<TraditionalCurrency> getTraditionalNonFiatCurrencies() {
         return Arrays.asList(
@@ -380,7 +380,7 @@ public class CurrencyUtil {
                     .filter(cryptoCurrency -> cryptoCurrency.getCode().equals(currencyCode))
                     .findAny();
 
-            String xmrOrRemovedAsset = "XMR".equals(currencyCode) ? "Monero" :
+            String xmrOrRemovedAsset = "TSK".equals(currencyCode) ? "Tuske" :
                 removedCryptoCurrency.isPresent() ? removedCryptoCurrency.get().getName() : Res.get("shared.na");
             return getCryptoCurrency(currencyCode).map(TradeCurrency::getName).orElse(xmrOrRemovedAsset);
         }

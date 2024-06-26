@@ -66,7 +66,7 @@ public class AboutView extends ActivatableView<GridPane, Void> {
         hyperlinkWithIcon = addHyperlinkWithIcon(root, ++gridRow, Res.get("setting.about.contribute"), "https://github.com/haveno-dex/haveno#support");
         GridPane.setColumnSpan(hyperlinkWithIcon, 2);
 
-        boolean isXmr = Res.getBaseCurrencyCode().equals("XMR");
+        boolean isXmr = Res.getBaseCurrencyCode().equals("TSK");
         addTitledGroupBg(root, ++gridRow, isXmr ? 3 : 2, Res.get("setting.about.providers"), Layout.GROUP_DISTANCE);
 
         label = addLabel(root, gridRow, Res.get(isXmr ? "setting.about.apisWithFee" : "setting.about.apis"), Layout.TWICE_FIRST_ROW_AND_GROUP_DISTANCE);
@@ -75,7 +75,7 @@ public class AboutView extends ActivatableView<GridPane, Void> {
         addCompactTopLabelTextField(root, ++gridRow, Res.get("setting.about.pricesProvided"),
                 "Haveno's pricenode (https://price.haveno.network)");
         if (isXmr)
-            addCompactTopLabelTextField(root, ++gridRow, Res.get("setting.about.feeEstimation.label"), "Monero node");
+            addCompactTopLabelTextField(root, ++gridRow, Res.get("setting.about.feeEstimation.label"), "Tuske node");
 
         addTitledGroupBg(root, ++gridRow, 2, Res.get("setting.about.versionDetails"), Layout.GROUP_DISTANCE);
         addCompactTopLabelTextField(root, gridRow, Res.get("setting.about.version"), Version.VERSION, Layout.TWICE_FIRST_ROW_AND_GROUP_DISTANCE);

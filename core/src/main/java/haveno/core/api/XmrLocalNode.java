@@ -160,9 +160,9 @@ public class XmrLocalNode {
      * Persist the settings to preferences if the node started successfully.
      */
     public void startNode(XmrNodeSettings settings) throws IOException {
-        if (isDetected()) throw new IllegalStateException("Local Monero node already online");
+        if (isDetected()) throw new IllegalStateException("Local Tuske node already online");
 
-        log.info("Starting local Monero node: " + settings);
+        log.info("Starting local Tuske node: " + settings);
 
         var args = new ArrayList<>(MONEROD_ARGS);
 
@@ -192,8 +192,8 @@ public class XmrLocalNode {
      * Does not remove the last XmrNodeSettings.
      */
     public void stopNode() {
-        if (!isDetected()) throw new IllegalStateException("Local Monero node is not running");
-        if (daemon.getProcess() == null || !daemon.getProcess().isAlive()) throw new IllegalStateException("Cannot stop local Monero node because we don't own its process"); // TODO (woodser): remove isAlive() check after monero-java 0.5.4 which nullifies internal process
+        if (!isDetected()) throw new IllegalStateException("Local Tuske node is not running");
+        if (daemon.getProcess() == null || !daemon.getProcess().isAlive()) throw new IllegalStateException("Cannot stop local Tuske node because we don't own its process"); // TODO (woodser): remove isAlive() check after monero-java 0.5.4 which nullifies internal process
         daemon.stopProcess();
         for (var listener : listeners) listener.onNodeStopped();
     }

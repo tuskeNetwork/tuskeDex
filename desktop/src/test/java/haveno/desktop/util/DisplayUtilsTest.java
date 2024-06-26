@@ -32,8 +32,8 @@ public class DisplayUtilsTest {
     public void setUp() {
         Locale.setDefault(Locale.US);
         GlobalSettings.setLocale(Locale.US);
-        Res.setBaseCurrencyCode("XMR");
-        Res.setBaseCurrencyName("Monero");
+        Res.setBaseCurrencyCode("TSK");
+        Res.setBaseCurrencyName("Tuske");
     }
 
     @Test

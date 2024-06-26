@@ -41,8 +41,8 @@ public class ImmutableCoinFormatterTest {
     @BeforeEach
     public void setUp() {
         Locale.setDefault(new Locale("en", "US"));
-        Res.setBaseCurrencyCode("XMR");
-        Res.setBaseCurrencyName("Monero");
+        Res.setBaseCurrencyCode("TSK");
+        Res.setBaseCurrencyName("Tuske");
     }
 
     @Test

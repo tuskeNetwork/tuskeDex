@@ -206,9 +206,9 @@ public class OfferUtil {
 
         extraDataMap.put(CAPABILITIES, Capabilities.app.toStringList());
 
-        if (currencyCode.equals("XMR") && direction == OfferDirection.SELL) {
+        if (currencyCode.equals("TSK") && direction == OfferDirection.SELL) {
             preferences.getAutoConfirmSettingsList().stream()
-                    .filter(e -> e.getCurrencyCode().equals("XMR"))
+                    .filter(e -> e.getCurrencyCode().equals("TSK"))
                     .filter(AutoConfirmSettings::isEnabled)
                     .forEach(e -> extraDataMap.put(XMR_AUTO_CONF, XMR_AUTO_CONF_ENABLED_VALUE));
         }
@@ -244,10 +244,10 @@ public class OfferUtil {
     }
 
     public static boolean isTraditionalOffer(Offer offer) {
-        return offer.getBaseCurrencyCode().equals("XMR");
+        return offer.getBaseCurrencyCode().equals("TSK");
     }
 
     public static boolean isCryptoOffer(Offer offer) {
-        return offer.getCounterCurrencyCode().equals("XMR");
+        return offer.getCounterCurrencyCode().equals("TSK");
     }
 }

@@ -15,8 +15,8 @@ public class NationalAccountIdValidatorTest {
     @BeforeEach
     public void setup() {
         Locale.setDefault(new Locale("en", "US"));
-        Res.setBaseCurrencyCode("XMR");
-        Res.setBaseCurrencyName("Monero");
+        Res.setBaseCurrencyCode("TSK");
+        Res.setBaseCurrencyName("Tuske");
     }
 
     @Test

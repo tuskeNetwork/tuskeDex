@@ -52,7 +52,7 @@ public class GUIUtilTest {
     @Test
     public void testTradeCurrencyConverter() {
         Map<String, Integer> offerCounts = new HashMap<>() {{
-            put("XMR", 11);
+            put("TSK", 11);
             put("EUR", 10);
         }};
         StringConverter<TradeCurrency> tradeCurrencyConverter = GUIUtil.getTradeCurrencyConverter(
@@ -61,7 +61,7 @@ public class GUIUtilTest {
                 offerCounts
         );
 
-        assertEquals("✦ Monero (XMR) - 11 offers", tradeCurrencyConverter.toString(monero));
+        assertEquals("✦ Tuske (TSK) - 11 offers", tradeCurrencyConverter.toString(monero));
         assertEquals("★ Euro (EUR) - 10 offers", tradeCurrencyConverter.toString(euro));
     }
 

@@ -473,7 +473,7 @@ public class Offer implements NetworkPayload, PersistablePayload {
             return currencyCode;
         }
 
-        currencyCode = offerPayload.getBaseCurrencyCode().equals("XMR") ?
+        currencyCode = offerPayload.getBaseCurrencyCode().equals("TSK") ?
                 offerPayload.getCounterCurrencyCode() :
                 offerPayload.getBaseCurrencyCode();
         return currencyCode;
@@ -557,7 +557,7 @@ public class Offer implements NetworkPayload, PersistablePayload {
     }
 
     public boolean isXmr() {
-        return getCurrencyCode().equals("XMR");
+        return getCurrencyCode().equals("TSK");
     }
 
     public boolean isTraditionalOffer() {

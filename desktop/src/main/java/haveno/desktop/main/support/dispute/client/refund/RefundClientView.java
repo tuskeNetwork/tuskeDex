@@ -73,7 +73,7 @@ public class RefundClientView extends DisputeClientView {
 
     @Override
     protected NodeAddress getAgentNodeAddress(Contract contract) {
-        throw new RuntimeException("RefundClientView.getAgentNodeAddress() not implementd for XMR");
+        throw new RuntimeException("RefundClientView.getAgentNodeAddress() not implementd for TSK");
         //return contract.getRefundAgentNodeAddress();
     }
 

@@ -737,7 +737,7 @@ public abstract class TradeStepView extends AnchorPane {
     }
 
     protected boolean isXmrTrade() {
-        return getCurrencyCode(trade).equals("XMR");
+        return getCurrencyCode(trade).equals("TSK");
     }
 
     private void updateTradePeriodState(Trade.TradePeriodState tradePeriodState) {

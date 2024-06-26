@@ -266,9 +266,9 @@ public final class XmrConnectionService {
     }
 
     public void verifyConnection() {
-        if (daemon == null) throw new RuntimeException("No connection to Monero node");
-        if (!Boolean.TRUE.equals(isConnected())) throw new RuntimeException("No connection to Monero node");
-        if (!isSyncedWithinTolerance()) throw new RuntimeException("Monero node is not synced");
+        if (daemon == null) throw new RuntimeException("No connection to Tuske node");
+        if (!Boolean.TRUE.equals(isConnected())) throw new RuntimeException("No connection to Tuske node");
+        if (!isSyncedWithinTolerance()) throw new RuntimeException("Tuske node is not synced");
     }
 
     public boolean isSyncedWithinTolerance() {
@@ -604,7 +604,7 @@ public final class XmrConnectionService {
 
                 // poll daemon
                 if (daemon == null) switchToBestConnection();
-                if (daemon == null) throw new RuntimeException("No connection to Monero daemon");
+                if (daemon == null) throw new RuntimeException("No connection to Tuske daemon");
                 try {
                     lastInfo = daemon.getInfo();
                 } catch (Exception e) {

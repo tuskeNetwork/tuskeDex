@@ -136,8 +136,8 @@ public class Price extends MonetaryWrapper implements Comparable<Price> {
 
     public String toFriendlyString() {
         return monetary instanceof CryptoMoney ?
-                ((CryptoMoney) monetary).toFriendlyString() + "/XMR" :
-                ((TraditionalMoney) monetary).toFriendlyString().replace(((TraditionalMoney) monetary).currencyCode, "") + "XMR/" + ((TraditionalMoney) monetary).currencyCode;
+                ((CryptoMoney) monetary).toFriendlyString() + "/TSK" :
+                ((TraditionalMoney) monetary).toFriendlyString().replace(((TraditionalMoney) monetary).currencyCode, "") + "TSK/" + ((TraditionalMoney) monetary).currencyCode;
     }
 
     public String toPlainString() {

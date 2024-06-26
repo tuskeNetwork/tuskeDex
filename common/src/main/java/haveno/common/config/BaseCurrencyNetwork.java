@@ -25,8 +25,8 @@ import org.bitcoinj.utils.MonetaryFormat;
 
 public enum BaseCurrencyNetwork {
     TSK_MAINNET(new XmrMainNetParams(), "TSK", "MAINNET", "Tuske"),
-    XMR_STAGENET(new XmrStageNetParams(), "XMR", "STAGENET", "Monero"),
-    XMR_LOCAL(new XmrTestNetParams(), "XMR", "TESTNET", "Monero");
+    XMR_STAGENET(new XmrStageNetParams(), "TSK", "STAGENET", "Tuske"),
+    XMR_LOCAL(new XmrTestNetParams(), "TSK", "TESTNET", "Tuske");
 
     @Getter
     private final NetworkParameters parameters;
