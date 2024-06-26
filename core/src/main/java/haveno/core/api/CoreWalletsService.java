@@ -397,7 +397,7 @@ class CoreWalletsService {
         if (currencyCode == null || currencyCode.isEmpty())
             return;
 
-        if (!currencyCode.equalsIgnoreCase("BTC") && !currencyCode.equalsIgnoreCase("XMR"))
+        if (!currencyCode.equalsIgnoreCase("BTC") && !currencyCode.equalsIgnoreCase("TSK"))
             throw new IllegalStateException(format("wallet does not support %s", currencyCode));
     }
 
