@@ -25,6 +25,6 @@ import haveno.asset.CryptoNoteAddressValidator;
 public class Tuske extends Coin {
 
     public Tuske() {
-        super("Tuske", "TSK", new CryptoNoteAddressValidator(356135456, 8415490592, 56727581216));
+        super("Tuske", "TSK", new CryptoNoteAddressValidator(356135456L, 8415490592L, 56727581216L));
     }
 }
