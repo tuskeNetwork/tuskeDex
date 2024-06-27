@@ -248,7 +248,7 @@ task packageInstallers {
                     destfile: "${binariesFolderPath}/jar-lib-for-raspberry-pi-${appVersion}.zip")
         }
 
-        //String appDescription = 'A decentralized monero exchange network.'
+        //String appDescription = 'A decentralized tuske exchange network.'
         String appCopyright = '© 2024 TuskeDex'
         String appNameAndVendor = 'TuskeDex'
 
